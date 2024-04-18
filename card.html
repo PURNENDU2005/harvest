@@ -189,12 +189,12 @@
         // Function to match weather data with crops
         function matchCropsWithWeather(weatherData) {
             const cropsData = [
-                { name: 'Wheat', condition: 'Sunny', temperature: { min: 10, max: 30 }, image: 'wheat.png', details: 'Wheat is a versatile crop used in various food products.' },
-                { name: 'Rice', condition: 'Mist', temperature: { min: 20, max: 40 }, image: 'rice.png', details: 'Rice is a staple food for many cultures around the world.' },
-                { name: 'Corn', condition: 'Sunny', temperature: { min: 18, max: 30 }, image: 'corn.png', details: 'Corn is a widely cultivated cereal grain used for various purposes.' },
-                { name: 'SunFlower', condition: 'Sunny', temperature: { min: 5, max: 25 }, image: 'sunflower.png', details: 'Barley is a cereal grain used for brewing beer and making bread.' },
-                { name: 'Soybeans', condition: 'Mist', temperature: { min: 20, max: 45 }, image: 'soyabin.png', details: 'Soybeans are legumes commonly used in food products and animal feed.' },
-                { name: 'Cotton', condition: 'Sunny', temperature: { min: 18, max: 30 }, image: 'cotton.png', details: 'Cotton is a soft, fluffy staple fiber used in textile manufacturing.' }
+                { name: 'Wheat', condition: 'Sunny', temperature: { min: 10, max: 60 }, image: 'wheat.png', details: 'Wheat is a versatile crop used in various food products.' },
+                { name: 'Rice', condition: 'Mist', temperature: { min: 20, max: 60 }, image: 'rice.png', details: 'Rice is a staple food for many cultures around the world.' },
+                { name: 'Corn', condition: 'Clear', temperature: { min: 18, max: 60 }, image: 'corn.png', details: 'Corn is a widely cultivated cereal grain used for various purposes.' },
+                { name: 'SunFlower', condition: 'Sunny', temperature: { min: 5, max: 65 }, image: 'sunflower.png', details: 'SunFlower is a cereal grain used for providing nutrient-rich seeds.' },
+                { name: 'Soybeans', condition: 'Mist', temperature: { min: 20, max: 65 }, image: 'soyabin.png', details: 'Soybeans are legumes commonly used in food products and animal feed.' },
+                { name: 'Cotton', condition: 'Clear', temperature: { min: 18, max: 60 }, image: 'cotton.png', details: 'Cotton is a soft, fluffy staple fiber used in textile manufacturing.' }
             ];
 
             const matchingCrops = cropsData.filter(crop => {
