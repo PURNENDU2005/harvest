@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    <title>HARVESTER</title>
+    <style>
+
+.orbitron-heading { /* Replace "orbitron-heading" with your descriptive class name */
+      font-family: "Orbitron", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .arvo-regular {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.arvo-bold {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.arvo-regular-italic {
+  font-family: "Arvo", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arvo-bold-italic {
+  font-family: "Arvo", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+        body {
+            font-family: 'Arvo', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #66f886;
+        }
+
+        header {
+            background-color: transparent; /* Removed background color */
+            color: #343a40; /* Changed text color */
+            padding: 80px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left-corner {
+            font-size: 70px; /* Increased font size */
+            text-transform: uppercase;
+            color: #343a40; /* Changed text color */
+        }
+
+        .right-corner {
+            display: flex;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 0 20px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .card {
+            width: 400px; /* Adjust width as needed */
+            height: 300px; /* Adjust height as needed */
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 35px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 2px solid #000; /* You can customize the border width and color */
+            border-radius: 8px; /* Optional: Adds rounded corners to the border */
+            padding: 20px; /* Optional: Adds space between content and border */
+            width: 300px; /* Optional: Adjust width as needed */
+            margin: 20px auto; /* Optional: Centers the card horizontally */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow effect */
+            background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+            border-radius: 20px;
+            transition: all .3s;
+        }
+
+        .card2 {
+            width: 190px;
+            height: 254px;
+            background-color: #1a1a1a;
+            border-radius: 20px;
+            transition: all .2s;
+        }
+        
+        .card2:hover {
+            transform: scale(0.98);
+            border-radius: 20px;
+        }
+        
+        .card:hover {
+            box-shadow: 0px 10px 30px 5px rgb(0, 0, 0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 60%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        .details {
+            padding: 10px;
+            background-color: #fff;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+    .review-box {
+        width: 1300px;
+        height: 250px;
+        background-color: rgba(255, 255, 255, 0); /* Semi-transparent white */
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        margin: 50px auto;
+        box-shadow: 0 0 10px rgba(143, 142, 142, 0.206); /* Shadow effect */
+    }
+
+    .review-slide {
+        width: 300%; /* Adjusted width for horizontal sliding */
+        height: 100%;
+        display: flex;
+        flex-direction: row; /* Changed to row for horizontal sliding */
+        transition: transform 0.5s ease; /* Smooth slide transition */
+    }
+
+    .review {
+        flex: 0 0 33.33%; /* Adjusted width for each review */
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        text-align: center; /* Center text */
+    }
+
+    .review img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .reviewer-name {
+        font-weight: bold;
+    }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        } 
+
+        .location-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #locationInfo {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    #locationInfo h2 {
+      margin-bottom: 10px;
+    }
+
+    #locationInfo p {
+      margin: 5px 0;
+    }
+
+    #errorMessage {
+      color: red;
+      margin-top: 10px;
+    }
+
+    #confirmation {
+      display: none;
+      margin-top: 20px;
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        
+        <div class="left-corner"><h8><span class="orbitron-heading">HARVESTER</span></h8>
+        </div> 
+        <div class="right-corner">
+            <div class="more-menu">
+              <button onclick="sendEmail()">Contact</button>
+              <a href="help.html" class="button">Help</a>
+                <!-- <button id="helpButton">Help</button> -->
+
+<a id="helpLink" href="help.html" style="display: none;"></a>
+
+<style>
+  #helpButton {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .button2 {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: rgb(161, 255, 20);
+  border-radius: 100px;
+  color: rgb(19, 19, 19);
+  font-weight: 600;
+  border: 10;
+  border-color: #000000;
+  position: relative;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+  padding-left: 8px;
+  transition-duration: .5s;
+  margin: auto; /* Center horizontally */
+}
+
+.svgIcon { 
+  height: 25px;
+  transition-duration: 1.5s;
+}
+
+.bell path {
+  fill: rgb(19, 19, 19);
+}
+
+.button2:hover {
+  background-color: rgb(192, 255, 20);
+  transition-duration: .5s;
+}
+
+.button2:active {
+  transform: scale(0.97);
+  transition-duration: .2s;
+}
+
+.button2:hover .svgIcon {
+  transform: rotate(250deg);
+  transition-duration: 1.5s;
+}
+</style>
+
+<script>
+  document.getElementById("helpButton").addEventListener("click", function() {
+    document.getElementById("helpLink").click();
+  });
+</script>
+            </div>
+        </div>
+    </header>
+    <main>
+      
+            <div class="location-container">
+                <div id="locationInfo"></div>
+                <p id="errorMessage"></p>
+                <div id="confirmation">
+                  
+                  <!-- <button id="confirmLocation">Yes</button> -->
+                  <a href="card.html" class="button">Yes</a>
+                  <a href="index.html" class="button">no</a>
+<!--                   
+                  <button id="cancelLocation">No</button> -->
+                </div>
+              </div>
+                <button class="button2" onclick="getLocation()">Get Location
+                  <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
+               </button>
+                
+              </button>
+              <!-- <button onclick="getLocation()">Get Location</button> -->
+        <div class="card-container">
+            <div class="card">
+                <div class="image-container">
+                    <img src="image\learncartoon.png" alt="Image">
+                </div>
+                <div class="details">
+                    <p>Knowledge</p>
+                    <a href="learn.html" class="button">Learn</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="image-container">
+                    <img src="image\newscartoon.png" alt="Image">
+                </div>
+                <div class="details">
+                    <p>News </p>
+                    <a href="news.html" class="button">Read</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="image-container">
+                    <img src="image\marketcartoon.png" alt="Image">
+                </div>
+                <div class="details">
+                    <p>Market </p>
+                    <a href="https://www.india.gov.in/topics/agriculture/marketing-prices" class="button">Analyis</a>
+                </div>
+            </div>
+        </div>
+        <div class="review-box">
+          <div class="review-slide">
+              <div class="review">
+                  <img src="image\man1.webp" alt="Reviewer Image">
+                  <p class="reviewer-name">Jishu Das</p>
+                  <p>This product is amazing!</p>
+              </div>
+              <div class="review">
+                  <img src="image\man2.png" alt="Reviewer Image">
+                  <p class="reviewer-name">Debraj Ghosh</p>
+                  <p>Very satisfied with the service!</p>
+              </div>
+              <div class="review">
+                  <img src="image\man2.webp" alt="Reviewer Image">
+                  <p class="reviewer-name">Aikyyo Banik</p>
+                  <p>Highly recommended!</p>
+              </div>
+          </div>
+      </div>
+      
+      <script>       
+        function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+        .then(response => response.json())
+        .then(data => {
+          const country = data.countryName;
+          const state = data.principalSubdivision;
+          const district = data.locality; // Add district information
+
+          const locationInfo = document.getElementById("locationInfo");
+          locationInfo.innerHTML = `
+            <h2>Your Location (Confirmation)</h2>
+            <p>We detected your location in:</p>
+            <p>${country}, ${state}, ${district}</p> <!-- Include district information here -->
+            <p>Is this correct?</p>
+            
+          `;
+
+
+          locationInfo.style.display = "block";
+          const confirmation = document.getElementById("confirmation");
+          confirmation.style.display = "block";
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function showError(error) {
+      const errorMessage = document.getElementById("errorMessage");
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorMessage.textContent = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          errorMessage.textContent = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          errorMessage.textContent = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          errorMessage.textContent = "An unknown error occurred.";
+          break;
+      }
+    }
+
+    const confirmLocationButton = document.getElementById("confirmLocation");
+    const cancelLocationButton = document.getElementById("cancelLocation");
+
+    confirmLocationButton.addEventListener("click", () => {
+  // Perform reverse geocoding to get address details (assuming confirmation)
+  fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+    .then(response => response.json())
+    .then(data => {
+      const locationInfo = document.getElementById("locationInfo");
+      locationInfo.innerHTML = `
+        <h2>Your Location</h2>
+        <p>${data.locality || data.city}, ${data.subAdministrativeArea || data.administrativeArea}, ${data.countryName}</p>
+      `;
+      document.getElementById("confirmation").style.display = "none";
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+    cancelLocationButton.addEventListener("click", () => {
+      const locationInfo = document.getElementById("locationInfo");
+      locationInfo.style.display = "none";
+      document.getElementById("confirmation").style.display = "none";
+    });
+
+     // JavaScript for automatic review sliding
+     let index = 0;
+          const reviewSlides = document.querySelector('.review-slide');
+          const reviews = document.querySelectorAll('.review');
+      
+          function showReview() {
+              index++;
+              if (index === reviews.length) {
+                  index = 0;
+              }
+              reviewSlides.style.transform = `translateX(-${index * 100}%)`; // Adjusted for horizontal sliding
+          }
+      
+          setInterval(showReview, 2000); // Change review every 3 seconds (adjust as needed)
+
+          function sendEmail() {
+            // Define the email address
+            const emailAddress = 'hackathon289@gmail.com';
+            // Create the mailto link
+            const mailtoLink = `mailto:${emailAddress}`;
+            // Open the default email client with the pre-filled email address
+            window.location.href = mailtoLink;
+        }
+</script>
+    </main>
+    <footer>
+        <p>Copyright &copy; 2024 HARVESTER. All rights reserved.</p>
+    </footer>
+</body>
+</html>

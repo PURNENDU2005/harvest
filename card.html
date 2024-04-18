@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fade-in 0.5s ease-out;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #locationAndWeatherInfo {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #matchingCropsContainer {
+            margin-top: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #matchingCrops {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .crop-card {
+            flex: 1 0 200px; /* Equal width for each card */
+            margin: 10px;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            border: 2px solid #ffffff; /* Border */
+        }
+
+        @keyframes scale-in {
+            0% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .crop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .crop-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 10px; /* Center image vertically */
+            display: block;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .crop-card h3 {
+            margin: 0; 
+            color: #555;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .crop-card p {
+            margin: 0;
+            color: #777;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Report</h1>
+        <div id="locationAndWeatherInfo"></div>
+        <div id="matchingCropsContainer">
+            <h2>Matching Crops</h2>
+            <div id="matchingCrops"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to extract query parameters from URL
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Function to get location details and weather report
+        function getLocationAndWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to handle successful geolocation retrieval
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Get location details using latitude and longitude
+            fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+                .then(response => response.json())
+                .then(data => {
+                    const locationDetails = `${data.locality}, ${data.principalSubdivision}, ${data.countryName}`;
+
+                    // Display location details
+                    const locationAndWeatherInfo = document.getElementById("locationAndWeatherInfo");
+                    locationAndWeatherInfo.innerHTML = `<h2>Location: ${locationDetails}</h2>`;
+
+                    // Fetch weather details using the location
+                    const apiKey = "d67c46b3fe184762bb4175142241104"; // Replace with your WeatherAPI API key
+                    fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(locationDetails)}`)
+                        .then(response => response.json())
+                        .then(weatherData => {
+                            if (weatherData.error) {
+                                locationAndWeatherInfo.innerHTML += `<p>Error getting weather data: ${weatherData.error.message}</p>`;
+                            } else {
+                                // Display weather details
+                                locationAndWeatherInfo.innerHTML += `
+                                    <h2>Weather Details</h2>
+                                    <p>Temperature: ${weatherData.current.temp_c}°C</p>
+                                    <p>Condition: ${weatherData.current.condition.text}</p>
+                                    <p>Humidity: ${weatherData.current.humidity}%</p>
+                                    <p>Wind Speed: ${weatherData.current.wind_kph} km/h</p>
+                                `;
+
+                                // Match weather data with crops
+                                const matchingCrops = matchCropsWithWeather(weatherData.current);
+                                displayMatchingCrops(matchingCrops);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Function to handle geolocation error
+        function showError(error) {
+            alert("Error getting geolocation: " + error.message);
+        }
+
+        // Function to match weather data with crops
+        function matchCropsWithWeather(weatherData) {
+            const cropsData = [
+                { name: 'Wheat', condition: 'Sunny', temperature: { min: 10, max: 30 }, image: 'https://via.placeholder.com/150', details: 'Wheat is a versatile crop used in various food products.' },
+                { name: 'Rice', condition: 'Mist', temperature: { min: 20, max: 40 }, image: 'image/rice.png', details: 'Rice is a staple food for many cultures around the world.' },
+                { name: 'Corn', condition: 'Sunny', temperature: { min: 18, max: 30 }, image: 'https://via.placeholder.com/150', details: 'Corn is a widely cultivated cereal grain used for various purposes.' },
+                { name: 'Barley', condition: 'Sunny', temperature: { min: 5, max: 25 }, image: 'https://via.placeholder.com/150', details: 'Barley is a cereal grain used for brewing beer and making bread.' },
+                { name: 'Soybeans', condition: 'Mist', temperature: { min: 20, max: 45 }, image: 'image/soyabin.png', details: 'Soybeans are legumes commonly used in food products and animal feed.' },
+                { name: 'Cotton', condition: 'Sunny', temperature: { min: 18, max: 30 }, image: 'https://via.placeholder.com/150', details: 'Cotton is a soft, fluffy staple fiber used in textile manufacturing.' }
+            ];
+
+            const matchingCrops = cropsData.filter(crop => {
+                return weatherData.temp_c >= crop.temperature.min &&
+                    weatherData.temp_c <= crop.temperature.max &&
+                    weatherData.condition.text === crop.condition;
+            });
+
+            return matchingCrops;
+        }
+
+        // Function to display matching crops
+        function displayMatchingCrops(crops) {
+            const matchingCropsDiv = document.getElementById("matchingCrops");
+            matchingCropsDiv.innerHTML = '';
+
+            if (crops.length === 0) {
+                matchingCropsDiv.innerHTML += '<p>No matching crops found for current weather conditions.</p>';
+            } else {
+                crops.forEach(crop => {
+                    const cropCard = `
+                        <div class="crop-card" style="background-color: #f0f8ff; border-color: #ccc;">
+                            <img src="${crop.image}" alt="${crop.name}">
+                            <h3>${crop.name}</h3>
+                            <p>${crop.details}</p>
+                        </div>
+                    `;
+                    matchingCropsDiv.innerHTML += cropCard;
+                });
+            }
+        }
+
+        // Call getLocationAndWeather when the page loads
+        window.onload = getLocationAndWeather;
+    </script>
+</body>
+</html>

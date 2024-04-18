@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Slider</title>
+    <style>
+
+.container-bg {
+  width: 100%;
+  height: 100%;
+  /* Add your background pattern here */
+  background: rgba(29, 31, 32, 0.904)
+    radial-gradient(rgba(255, 255, 255, 0.712) 10%, transparent 1%);
+
+  background-size: 11px 11px;
+}
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .news-slider {
+            white-space: nowrap;
+            transition: transform 1s ease;
+        }
+
+        .news-item {
+            display: inline-block;
+            vertical-align: top;
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .news-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .story-statement {
+            padding: 5px;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+        .bold-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        .section-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .card-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            margin: 5px;
+        }
+        .card {
+            width: 450px;
+            height: 450px;
+            background-color: #fff;
+            border-radius: 51px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            border: 2px solid #4CAF50; /* Add border */
+        }
+        .card img {
+            width: 100%;
+            height: 60%;
+            display: block;
+            padding: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .card-details {
+            padding: 10px;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card:hover img {
+            transform: scale(1.1);
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 {
+            margin-top: 0;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        p {
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Agriculture News
+    </div>
+
+    <div class="container">
+        <div class="news-slider" id="newsSlider">
+            <div class="news-item">
+                <img class="news-image" src="image\news1.png" alt="News 1">
+                <div class="story-statement">
+                    <h2> News 1</h2>
+                    <p>This is the story statement for breaking news 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet ligula eget nulla fringilla, vel feugiat metus vestibulum.</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img class="news-image" src="image\news2.webp" alt="News 2">
+                <div class="story-statement">
+                    <h2> News 2</h2>
+                    <p>This is the story statement for breaking news 2. Ut lacinia malesuada urna, id accumsan lacus ultrices sit amet. Mauris nec sapien aliquam, fermentum felis sit amet, sodales ipsum.</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img class="news-image" src="image\news.jpeg" alt="News 3">
+                <div class="story-statement">
+                    <h2> News 3</h2>
+                    <p>This is the story statement for breaking news 3. Integer ut mi vestibulum, eleifend elit sed, eleifend lorem. Duis sit amet consequat ex. Sed lobortis arcu vitae ex tincidunt, ut venenatis ipsum volutpat.</p>
+                </div>
+            </div>
+            <div class="news-item">
+                <img class="news-image" src="image\greennews.webp" alt="News 4">
+                <div class="story-statement">
+                    <h2> News 4</h2>
+                    <p>This is the story statement for breaking news 4. Nunc auctor tristique tortor eget pharetra. Sed ultrices, urna nec bibendum luctus, turpis diam ullamcorper eros, eu auctor lacus eros non ligula.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div >
+        <div class="section-cards">
+            <div class="card-container">
+                <div class="card">
+                    <img src="image\news3.webp" alt="Card 1">
+                    <div class="card-details">
+                        <h3>NEWS 1</h3>
+                        <p>This is the story statement for breaking news 1. Integer ut mi vestibulum, eleifend elit sed, eleifend lorem. Duis sit amet consequat ex. Sed lobortis arcu vitae ex tincidunt, ut venenatis ipsum volutpat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <img src="image\news2.webp" alt="Card 2">
+                    <div class="card-details">
+                        <h3>NEWS  2</h3>
+                        <p>This is the story statement for breaking news 2. Ut lacinia malesuada urna, id accumsan lacus ultrices sit amet. Mauris nec sapien aliquam, fermentum felis sit amet, sodales ipsum.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <img src="image\greennews.webp" alt="Card 3">
+                    <div class="card-details">
+                        <h3>NEWS  3</h3>
+                        <p>This is the story statement for breaking news 3. Nunc auctor tristique tortor eget pharetra. Sed ultrices, urna nec bibendum luctus, turpis diam ullamcorper eros, eu auctor lacus eros non ligula.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <img src="image\iotnews.jpg" alt="Card 4">
+                    <div class="card-details">
+                        <h3>NEWS 4</h3>
+                        <p>This is the story statement for breaking news 4. Integer ut mi vestibulum, eleifend elit sed, eleifend lorem. Duis sit amet consequat ex. Sed lobortis arcu vitae ex tincidunt, ut venenatis ipsum volutpat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const newsSlider = document.getElementById("newsSlider");
+            let currentIndex = 0;
+
+            function showNextNews() {
+                currentIndex = (currentIndex + 1) % 4;
+                const offset = -currentIndex * 100;
+                newsSlider.style.transform = `translateX(${offset}%)`;
+            }
+
+            setInterval(showNextNews, 2000); // Change news every 4 seconds
+        });
+    </script>
+</body>
+</html>
